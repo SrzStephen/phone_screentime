@@ -1,0 +1,112 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: >
+  phonestats
+
+  Sample SAM Template for phonestats
+
+# More info about Globals: https://github.com/awslabs/serverless-application-model/blob/master/docs/globals.rst
+Globals:
+  Function:
+    Timeout: 3
+
+Resources:
+  Table:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      KeySchema:
+        - AttributeName: "phone_id"
+          KeyType: "HASH"
+        - AttributeName: "epoch"
+          KeyType: "RANGE"
+      AttributeDefinitions:
+        - AttributeName: "phone_id"
+          AttributeType: "S"
+        - AttributeName: "epoch"
+          AttributeType: "N"
+      ProvisionedThroughput:
+        ReadCapacityUnits: 1
+        WriteCapacityUnits: 1
+
+  PhoneStats:
+    Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
+    Properties:
+      CodeUri: src/lam
+      Handler: phone_use.handlers.file.lambda_handler
+      Runtime: python3.9
+      Architectures:
+        - x86_64
+      Events:
+        PutStats:
+          Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
+          Properties:
+            Path: /phone_stats
+            Method: post
+      FunctionUrlConfig:
+        AuthType: NONE
+      Environment:
+        Variables:
+          DYNAMO_TABLE_NAME: !Ref Table
+      Policies:
+        - Version: "2012-10-17"
+          Statement:
+            - Effect: Allow
+              Action:
+                - "dynamodb:Get*"
+                - "dynamodb:Query"
+                - "dynamodb:DescribeTable"
+                - "dynamodb:Scan"
+                - "dynamodb:BatchWrite*"
+                - "dynamodb:PutItem"
+                - "dynamodb:BatchGet*"
+              Resource: !GetAtt Table.Arn
+
+  Sankey:
+    Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
+    Properties:
+      CodeUri: src/lam
+      Handler: phone_use.handlers.queries.sankey
+      Runtime: python3.9
+      Architectures:
+        - x86_64
+      Events:
+        PutStats:
+          Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
+          Properties:
+            Path: /sankey
+            Method: get
+            RequestParameters:
+              - method.request.querystring.start_time:
+                  Required: true
+              - method.request.querystring.end_time:
+                  Required: true
+              - method.request.querystring.phone_id:
+                  Required: false
+      FunctionUrlConfig:
+        AuthType: NONE
+      Environment:
+        Variables:
+          DYNAMO_TABLE_NAME: !Ref Table
+          DEFAULT_PHONE: "Test"
+      Policies:
+        - Version: "2012-10-17"
+          Statement:
+            - Effect: Allow
+              Action:
+                - "dynamodb:Get*"
+                - "dynamodb:Query"
+                - "dynamodb:DescribeTable"
+                - "dynamodb:Scan"
+                - "dynamodb:BatchGet*"
+              Resource: !GetAtt Table.Arn
+
+Outputs:
+  PhoneStatsAPI:
+    Description: "API Gateway endpoint URL for Prod stage for Hello World function"
+    Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/phone_stats"
+  HelloWorldFunction:
+    Description: "Hello World Lambda Function ARN"
+    Value: !GetAtt  PhoneStats.Arn
+  HelloWorldFunctionIamRole:
+    Description: "Implicit IAM Role created for Hello World function"
+    Value: !GetAtt  PhoneStats.Arn

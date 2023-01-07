@@ -1,0 +1,12 @@
+version = 0.1
+[default]
+[default.deploy]
+[default.deploy.parameters]
+stack_name = "phone-stats-test"
+s3_bucket = "aws-sam-cli-managed-default-samclisourcebucket-15l3l7jbrfnmw"
+s3_prefix = "phone-stats-test"
+region = "ap-southeast-2"
+confirm_changeset = true
+capabilities = "CAPABILITY_IAM"
+disable_rollback = true
+image_repositories = []

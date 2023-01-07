@@ -1,0 +1,121 @@
+{
+  "resource": "/phone_stats",
+  "path": "/phone_stats",
+  "httpMethod": "POST",
+  "headers": {
+    "Accept-Encoding": "gzip",
+    "CloudFront-Forwarded-Proto": "https",
+    "CloudFront-Is-Desktop-Viewer": "false",
+    "CloudFront-Is-Mobile-Viewer": "true",
+    "CloudFront-Is-SmartTV-Viewer": "false",
+    "CloudFront-Is-Tablet-Viewer": "false",
+    "CloudFront-Viewer-ASN": "1221",
+    "CloudFront-Viewer-Country": "AU",
+    "Content-Type": "application/octet-stream",
+    "Device-Model": "SM-A715F",
+    "Password": "12345",
+    "Host": "aaaa",
+    "User-Agent": "Tasker/6.0.10 (Android/12)",
+    "Via": "aaaaa",
+    "X-Amz-Cf-Id": "aaa",
+    "X-Amzn-Trace-Id": "aaa",
+    "X-Forwarded-For": "aaa",
+    "X-Forwarded-Port": "443",
+    "X-Forwarded-Proto": "https"
+  },
+  "multiValueHeaders": {
+    "Accept-Encoding": [
+      "gzip"
+    ],
+    "CloudFront-Forwarded-Proto": [
+      "https"
+    ],
+    "CloudFront-Is-Desktop-Viewer": [
+      "false"
+    ],
+    "CloudFront-Is-Mobile-Viewer": [
+      "true"
+    ],
+    "CloudFront-Is-SmartTV-Viewer": [
+      "false"
+    ],
+    "CloudFront-Is-Tablet-Viewer": [
+      "false"
+    ],
+    "CloudFront-Viewer-ASN": [
+      "1221"
+    ],
+    "CloudFront-Viewer-Country": [
+      "AU"
+    ],
+    "Content-Type": [
+      "application/octet-stream"
+    ],
+    "Device-Model": [
+      "SM-A715F"
+    ],
+    "Password": [
+      "12345"
+    ],
+    "Host": [
+      "aaaaa"
+    ],
+    "User-Agent": [
+      "Tasker/6.0.10 (Android/12)"
+    ],
+    "Via": [
+      "aaaa"
+    ],
+    "X-Amz-Cf-Id": [
+      "aaaa"
+    ],
+    "X-Amzn-Trace-Id": [
+      "aaaa"
+    ],
+    "X-Forwarded-For": [
+      "aaaa"
+    ],
+    "X-Forwarded-Port": [
+      "443"
+    ],
+    "X-Forwarded-Proto": [
+      "https"
+    ]
+  },
+  "queryStringParameters": null,
+  "multiValueQueryStringParameters": null,
+  "pathParameters": null,
+  "stageVariables": null,
+  "requestContext": {
+    "resourceId": "aaa",
+    "resourcePath": "/phone_stats",
+    "httpMethod": "POST",
+    "extendedRequestId": "aaaa",
+    "requestTime": "11/Sep/2022:14:39:58 +0000",
+    "path": "/Prod/phone_stats",
+    "accountId": "aaaaa",
+    "protocol": "HTTP/1.1",
+    "stage": "Prod",
+    "domainPrefix": "hotepagg11",
+    "requestTimeEpoch": 1662907198198,
+    "requestId": "aaaaa",
+    "identity": {
+      "cognitoIdentityPoolId": null,
+      "accountId": null,
+      "cognitoIdentityId": null,
+      "caller": null,
+      "sourceIp": "aaaa",
+      "principalOrgId": null,
+      "accessKey": null,
+      "cognitoAuthenticationType": null,
+      "cognitoAuthenticationProvider": null,
+      "userArn": null,
+      "userAgent": "Tasker/6.0.10 (Android/12)",
+      "user": null
+    },
+    "domainName": "aaaaa.com",
+    "apiId": "aaaa"
+  },
+  "body": "1662906798,99520,27,on\n1662906798,99520,27,on\n1662906960,99681,27,on\n1662907080,99801,26,on\n",
+  "isBase64Encoded": false
+}
