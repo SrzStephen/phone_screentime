@@ -21,7 +21,12 @@ class BaseRequest(BaseModel):
     def to_body_format(body: str) -> List[BodyFormat]:
 
         return [
-            BodyFormat(epoch=x[0], uptime=x[1], battery=x[2], screen_state=x[3],)
+            BodyFormat(
+                epoch=x[0],
+                uptime=x[1],
+                battery=x[2],
+                screen_state=x[3],
+            )
             for x in [line.split(",") for line in body.split("\n") if line != ""]
         ]
 
